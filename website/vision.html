@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>วิสัยทัศน์ | สภานักเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .vision-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--pink);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vision-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .vision-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-light);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: 18px;
+      margin-bottom: 14px;
+    }
+    .vision-card h3 { font-size: 16px; font-weight: 700; color: var(--blue); margin-bottom: 10px; line-height: 1.4; }
+    .vision-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    @media (max-width: 480px) {
+      .vision-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo-area">
+      <div class="logo-circle">
+        <img src="logo.jpg" alt="โลโก้">
+      </div>
+      <div class="logo-text">
+        <h1>สภานักเรียนโรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</h1>
+        <p>Nawaminthrachinuthit Triam Udom Suksa Nomklao Student Council</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="vision.html" class="active">วิสัยทัศน์</a></li>
+      <li><a href="structure.html">ทำเนียบคณะกรรมการ</a></li>
+      <li><a href="news.html">ข่าวสารกิจกรรม</a></li>
+      <li><a href="report.html">แจ้งปัญหา</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="เมนู">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">หน้าแรก</a>
+    <a href="vision.html" class="active">วิสัยทัศน์</a>
+    <a href="structure.html">ทำเนียบ</a>
+    <a href="news.html">ข่าวสาร</a>
+    <a href="report.html">แจ้งปัญหา</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="section-heading"><i class="fa-solid fa-lightbulb"></i> วิสัยทัศน์และนโยบายหลัก</div>
+
+  <div class="vision-grid">
+    <div class="vision-card">
+      <div class="vision-icon"><i class="fa-solid fa-microphone"></i></div>
+      <h3>1. รับฟังเสียงนักเรียน (YoUr Voice)</h3>
+      <p>เป็นกระบอกเสียงและตัวแทนที่แท้จริงในการรับฟังทุกปัญหาและข้อเสนอแนะ เพื่อนำไปผลักดันพัฒนาโรงเรียนให้ตอบโจทย์ผู้เรียนสูงสุด</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-icon"><i class="fa-solid fa-star"></i></div>
+      <h3>2. ส่งเสริมกิจกรรมสร้างสรรค์ (Our Power)</h3>
+      <p>มุ่งมั่นจัดกิจกรรมที่เปิดโอกาสให้นักเรียนได้ดึงศักยภาพ และความอัจฉริยะในแต่ละด้านมาแสดงออกอย่างเต็มที่และเท่าเทียม</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h3>3. โปร่งใส ตรวจสอบได้</h3>
+      <p>ดำเนินงานสภานักเรียนทุกฝ่ายด้วยความซื่อสัตย์ ชี้แจงข้อมูลข่าวสาร แผนการทำงาน และงบประมาณอย่างชัดเจนผ่านระบบออนไลน์</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© SCNTUN 09 & SCNTUN 10 </p>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

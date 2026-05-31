@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แจ้งปัญหา | สภานักเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 720px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .page-header { text-align: center; margin-bottom: 28px; }
+    .page-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .page-header p { font-size: 14px; color: var(--text-muted); }
+
+    .admin-toggle {
+      display: flex; justify-content: center; gap: 10px; margin-top: 16px; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: none; transition: 0.18s; text-decoration: none;
+    }
+    .btn-blue  { background: var(--blue); color: white; }
+    .btn-blue:hover { background: var(--blue-dark); }
+    .btn-dark  { background: #1e293b; color: white; }
+    .btn-dark:hover { background: #0f172a; }
+    .btn-sm { padding: 7px 14px; font-size: 12px; }
+    .btn-danger { background: #fce4ec; color: var(--pink); }
+    .btn-danger:hover { background: #f8bbd0; }
+    .btn-muted { background: #f1f5f9; color: var(--text-muted); }
+    .btn-muted:hover { background: #e2e8f0; color: var(--text); }
+
+    /* TYPE SELECTOR */
+    .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .type-btn {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 16px; text-align: center;
+      cursor: pointer; transition: 0.18s;
+    }
+    .type-btn:hover { border-color: var(--blue-dark); }
+    .type-btn.active-blue { border-color: var(--blue); }
+    .type-btn.active-pink { border-color: var(--pink); }
+    .type-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin: 0 auto 12px;
+      transition: transform 0.2s;
+    }
+    .type-btn:hover .type-icon { transform: scale(1.08); }
+    .icon-blue { background: var(--blue-light); color: var(--blue); }
+    .icon-pink { background: var(--pink-light); color: var(--pink); }
+    .type-btn strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 4px; }
+    .type-btn span { font-size: 12px; color: var(--text-muted); }
+
+    /* FORM */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .form-title {
+      font-size: 15px; font-weight: 700; color: var(--text);
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .field select, .field input, .field textarea {
+      width: 100%; padding: 10px 12px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 14px;
+      font-family: 'Sarabun', sans-serif; color: var(--text);
+      transition: border-color 0.18s;
+      outline: none;
+    }
+    .field select:focus, .field input:focus, .field textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(2,132,199,0.1);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .radio-group { display: flex; gap: 20px; flex-wrap: wrap; }
+    .radio-group label { display: flex; align-items: center; gap: 7px; font-size: 14px; cursor: pointer; }
+    .radio-group input[type=radio] { accent-color: var(--blue); }
+
+    .reporter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .reporter-box {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px;
+      margin-bottom: 16px;
+    }
+    .reporter-box .box-label {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      margin-bottom: 14px; display: flex; align-items: center; gap: 7px;
+    }
+
+    .notice {
+      background: var(--pink-light); border: 1px solid #f8bbd0;
+      border-radius: var(--radius-sm); padding: 12px 14px;
+      font-size: 13px; color: #880e4f;
+      display: flex; gap: 8px; align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .submit-btn {
+      width: 100%; padding: 13px;
+      border-radius: var(--radius-sm);
+      font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: 0.2s;
+    }
+    .submit-btn.blue-btn { background: var(--blue); color: white; }
+    .submit-btn.blue-btn:hover { background: var(--blue-dark); }
+    .submit-btn.pink-btn { background: var(--pink); color: white; }
+    .submit-btn.pink-btn:hover { background: #c2185b; }
+
+    /* ADMIN TABLE */
+    #admin-page { display: none; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .admin-header h2 { font-size: 1.2rem; font-weight: 700; }
+    .table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead { background: #1e293b; color: white; }
+    th { padding: 12px 14px; text-align: left; font-weight: 600; }
+    td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 99px;
+      font-size: 11px; font-weight: 700;
+    }
+    .badge-blue { background: var(--blue-light); color: var(--blue-dark); }
+    .badge-pink { background: var(--pink-light); color: var(--pink); }
+    .status-select {
+      font-size: 12px; padding: 5px 8px;
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
+      outline: none; cursor: pointer;
+    }
+    .empty-state { padding: 40px; text-align: center; color: var(--text-muted); }
+
+    /* LOGIN MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      align-items: center; justify-content: center;
+      z-index: 2000; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px; width: 100%; max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .modal-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 44px; }
+    .pw-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 15px; }
+    .login-error { font-size: 12px; color: var(--pink); margin-top: 6px; display: none; }
+
+    /* HIDDEN */
+    .hidden { display: none !important; }
+
+    @media (max-width: 520px) {
+      .type-grid { grid-template-columns: 1fr; }
+      .reporter-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo-area">
+      <div class="logo-circle">
+        <img src="logo.jpg" alt="โลโก้">
+      </div>
+      <div class="logo-text">
+        <h1>สภานักเรียนโรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</h1>
+        <p>Nawaminthrachinuthit Triam Udom Suksa Nomklao Student Council</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="vision.html">วิสัยทัศน์</a></li>
+      <li><a href="structure.html">ทำเนียบคณะกรรมการ</a></li>
+      <li><a href="news.html">ข่าวสารกิจกรรม</a></li>
+      <li><a href="report.html" class="active">แจ้งปัญหา</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="เมนู">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">หน้าแรก</a>
+    <a href="vision.html">วิสัยทัศน์</a>
+    <a href="structure.html">ทำเนียบ</a>
+    <a href="news.html">ข่าวสาร</a>
+    <a href="report.html" class="active">แจ้งปัญหา</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- USER PAGE -->
+  <div id="user-page">
+    <div class="page-header">
+      <h2>พบปัญหาภายในโรงเรียน แจ้งสภาได้ที่นี่</h2>
+      <p>กรุณาเลือกประเภทปัญหาเพื่อกรอกข้อมูล</p>
+      <div class="admin-toggle">
+        <button onclick="showUserPage()" class="btn btn-blue"><i class="fa-solid fa-pen-to-square"></i> หน้ากรอกแบบฟอร์ม</button>
+        <button onclick="openAdminGate()" class="btn btn-dark"><i class="fa-solid fa-user-shield"></i> แดชบอร์ดแอดมิน</button>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="type-grid">
+      <button class="type-btn active-blue" id="btn-maintenance" onclick="selectType('maintenance')">
+        <div class="type-icon icon-blue"><i class="fa-solid fa-wrench"></i></div>
+        <strong>อุปกรณ์ชำรุด / เสีย</strong>
+        <span>แอร์ ไฟ ลิฟต์ ประตู ห้องน้ำ</span>
+      </button>
+      <button class="type-btn" id="btn-smoking" onclick="selectType('smoking')">
+        <div class="type-icon icon-pink"><i class="fa-solid fa-smoking"></i></div>
+        <strong>แจ้งเหตุสูบบุหรี่</strong>
+        <span>บุหรี่ไฟฟ้า พื้นที่ห้ามสูบ</span>
+      </button>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card">
+      <div class="form-title" id="form-title">
+        <i class="fa-solid fa-wrench" style="color:var(--blue)"></i>
+        รายละเอียดการแจ้ง: อุปกรณ์ชำรุด / เสีย
+      </div>
+
+      <div id="field-maintenance">
+        <div class="field">
+          <label>ประเภทอุปกรณ์ *</label>
+          <select id="device-type">
+            <option value="">-- เลือกประเภทอุปกรณ์ --</option>
+            <option>ระบบไฟฟ้า / แสงสว่าง</option>
+            <option>เครื่องปรับอากาศ</option>
+            <option>ระบบประปา / ห้องน้ำ</option>
+            <option>ลิฟต์ / บันไดเลื่อน</option>
+            <option>อื่นๆ</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ระดับความเร่งด่วน</label>
+          <div class="radio-group">
+            <label><input type="radio" name="priority" value="ปกติ" checked> ปกติ</label>
+            <label style="color:#d97706"><input type="radio" name="priority" value="ด่วน"> ด่วน</label>
+            <label style="color:var(--pink)"><input type="radio" name="priority" value="ด่วนที่สุด"> ด่วนที่สุด</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="field-smoking" class="hidden">
+        <div class="notice">
+          <i class="fa-solid fa-shield-halved" style="margin-top:1px"></i>
+          <span><strong>ความปลอดภัย:</strong> ข้อมูลนี้เห็นเฉพาะแอดมินสภานักเรียนเท่านั้น</span>
+        </div>
+        <div class="field">
+          <label>ลักษณะที่พบ *</label>
+          <select id="smoke-type">
+            <option>พบเห็นคนกำลังสูบอยู่</option>
+            <option>ได้กลิ่นควันรบกวน</option>
+            <option>พบเศษก้นบุหรี่ หรือร่องรอยการสูบ</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>สถานที่ / พิกัดที่พบ *</label>
+        <input type="text" id="location" placeholder="เช่น ตึก EP ชั้น 4 ห้องน้ำฝั่งซ้าย">
+      </div>
+      <div class="field">
+        <label>รายละเอียดเพิ่มเติม</label>
+        <textarea id="details" placeholder="ระบุอาการชำรุด หรือข้อมูลเพิ่มเติม"></textarea>
+      </div>
+
+      <div class="reporter-box">
+        <div class="box-label"><i class="fa-solid fa-id-card" style="color:var(--blue)"></i> ข้อมูลผู้แจ้งปัญหา *</div>
+        <div class="reporter-grid">
+          <div class="field" style="margin:0">
+            <label>ชื่อ - นามสกุล *</label>
+            <input type="text" id="reporter-name" placeholder="ชื่อ-นามสกุล">
+          </div>
+          <div class="field" style="margin:0">
+            <label>ชั้น / ห้อง *</label>
+            <input type="text" id="reporter-class" placeholder="เช่น ม.5/2">
+          </div>
+          <div class="field" style="margin:0">
+            <label>เลขที่ *</label>
+            <input type="text" id="reporter-no" placeholder="เช่น 9">
+          </div>
+        </div>
+      </div>
+
+      <button class="submit-btn blue-btn" id="submit-btn" onclick="handleSubmit()">
+        <i class="fa-solid fa-paper-plane"></i> ส่งข้อมูลแจ้งปัญหากับสภานักเรียน
+      </button>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div id="admin-page">
+    <div class="admin-header">
+      <h2><i class="fa-solid fa-user-shield" style="color:var(--blue);margin-right:8px"></i>แดชบอร์ดผู้ดูแลระบบ</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="logoutAdmin()" class="btn btn-sm btn-muted">ออกจากระบบ</button>
+        <button onclick="clearAllData()" class="btn btn-sm btn-danger">ล้างข้อมูลทั้งหมด</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>วัน-เวลา</th>
+            <th>ประเภท</th>
+            <th>รายละเอียด</th>
+            <th>สถานที่</th>
+            <th>ผู้แจ้ง</th>
+            <th>สถานะ</th>
+          </tr>
+        </thead>
+        <tbody id="ticket-body"></tbody>
+      </table>
+      <div id="empty-state" class="empty-state hidden">ยังไม่มีข้อมูลแจ้งปัญหาในขณะนี้</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal-box">
+    <h3><i class="fa-solid fa-lock" style="color:var(--blue)"></i> เข้าสู่ระบบแอดมินสภา</h3>
+    <div class="field">
+      <label>ชื่อผู้ใช้</label>
+      <input type="text" id="login-user">
+    </div>
+    <div class="field">
+      <label>รหัสผ่าน</label>
+      <div class="pw-wrap">
+        <input type="password" id="login-pass">
+        <button type="button" class="pw-toggle" onclick="togglePw()"><i id="pw-icon" class="fa-solid fa-eye"></i></button>
+      </div>
+    </div>
+    <div class="login-error" id="login-error">ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button onclick="closeModal()" class="btn btn-muted" style="flex:1">ยกเลิก</button>
+      <button onclick="handleLogin()" class="btn btn-blue" style="flex:2"><i class="fa-solid fa-right-to-bracket"></i> เข้าสู่ระบบ</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© SCNTUN 09 & SCNTUN 10 </p>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+  const ADMIN_USER = "scntun2026";
+  const ADMIN_PASS = "S@c!N9t#u$N_2026%";
+  let isAdmin = false;
+  let selectedType = 'maintenance';
+
+  function selectType(type) {
+    selectedType = type;
+    const btnM = document.getElementById('btn-maintenance');
+    const btnS = document.getElementById('btn-smoking');
+    const fM = document.getElementById('field-maintenance');
+    const fS = document.getElementById('field-smoking');
+    const title = document.getElementById('form-title');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (type === 'maintenance') {
+      btnM.className = 'type-btn active-blue';
+      btnS.className = 'type-btn';
+      fM.classList.remove('hidden'); fS.classList.add('hidden');
+      title.innerHTML = '<i class="fa-solid fa-wrench" style="color:var(--blue)"></i> รายละเอียดการแจ้ง: อุปกรณ์ชำรุด / เสีย';
+      submitBtn.className = 'submit-btn blue-btn';
+    } else {
+      btnM.className = 'type-btn';
+      btnS.className = 'type-btn active-pink';
+      fM.classList.add('hidden'); fS.classList.remove('hidden');
+      title.innerHTML = '<i class="fa-solid fa-smoking" style="color:var(--pink)"></i> รายละเอียดการแจ้ง: แจ้งเหตุสูบบุหรี่ / บุหรี่ไฟฟ้า';
+      submitBtn.className = 'submit-btn pink-btn';
+    }
+  }
+
+  function handleSubmit() {
+    const loc = document.getElementById('location').value.trim();
+    const name = document.getElementById('reporter-name').value.trim();
+    const cls = document.getElementById('reporter-class').value.trim();
+    const no = document.getElementById('reporter-no').value.trim();
+    if (!loc || !name || !cls || !no) { alert('กรุณากรอกข้อมูลให้ครบถ้วนครับ'); return; }
+
+    let detail = '', cat = '', badgeCls = '';
+    if (selectedType === 'maintenance') {
+      const dev = document.getElementById('device-type').value;
+      if (!dev) { alert('กรุณาเลือกประเภทอุปกรณ์'); return; }
+      const priority = document.querySelector('input[name=priority]:checked').value;
+      detail = `[${dev}] ${document.getElementById('details').value || 'ไม่ระบุ'} (${priority})`;
+      cat = 'อุปกรณ์ชำรุด'; badgeCls = 'badge-blue';
+    } else {
+      detail = `[${document.getElementById('smoke-type').value}] ${document.getElementById('details').value || 'ไม่ระบุ'}`;
+      cat = 'แจ้งเหตุสูบบุหรี่'; badgeCls = 'badge-pink';
+    }
+
+    const ticket = {
+      id: Date.now(),
+      timestamp: new Date().toLocaleString('th-TH'),
+      cat, badgeCls, detail, location: loc,
+      reporter: `${name} (${cls} เลขที่ ${no})`,
+      status: 'รอดำเนินการ'
+    };
+    const tickets = JSON.parse(localStorage.getItem('tickets') || '[]');
+    tickets.unshift(ticket);
+    localStorage.setItem('tickets', JSON.stringify(tickets));
+    alert('ส่งข้อมูลแจ้งปัญหาเข้าระบบสภานักเรียนเรียบร้อยแล้วครับ!');
+    document.getElementById('location').value = '';
+    document.getElementById('details').value = '';
+    document.getElementById('reporter-name').value = '';
+    document.getElementById('reporter-class').value = '';
+    document.getElementById('reporter-no').value = '';
+    document.getElementById('device-type').value = '';
+    selectType('maintenance');
+  }
+
+  function showUserPage() {
+    document.getElementById('user-page').style.display = '';
+    document.getElementById('admin-page').style.display = 'none';
+  }
+
+  function openAdminGate() {
+    if (isAdmin) showAdminPage();
+    else document.getElementById('login-modal').classList.add('open');
+  }
+
+  function closeModal() { document.getElementById('login-modal').classList.remove('open'); }
+
+  function handleLogin() {
+    const u = document.getElementById('login-user').value;
+    const p = document.getElementById('login-pass').value;
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+      isAdmin = true; closeModal(); showAdminPage();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+
+  function logoutAdmin() { isAdmin = false; showUserPage(); }
+
+  function showAdminPage() {
+    document.getElementById('user-page').style.display = 'none';
+    document.getElementById('admin-page').style.display = '';
+    renderTable();
+  }
+
+  function togglePw() {
+    const inp = document.getElementById('login-pass');
+    const ico = document.getElementById('pw-icon');
+    if (inp.type === 'password') { inp.type = 'text'; ico.className = 'fa-solid fa-eye-slash'; }
+    else { inp.type = 'password'; ico.className = 'fa-solid fa-eye'; }
+  }
+
+  function updateStatus(id, status) {
+    let tickets = JSON.parse(localStorage.getItem('tickets') || '[]');
+    tickets = tickets.map(t => t.id === id ? { ...t, status } : t);
+    localStorage.setItem('tickets', JSON.stringify(tickets));
+    renderTable();
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('ticket-body');
+    const empty = document.getElementById('empty-state');
+    const tickets = JSON.parse(localStorage.getItem('tickets') || '[]');
+    tbody.innerHTML = '';
+    if (tickets.length === 0) { empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+    tickets.forEach(t => {
+      const statusColor = t.status === 'ดำเนินการแล้ว' ? 'color:#15803d' : t.status === 'ไม่ดำเนินการ' ? 'color:#be123c' : 'color:#b45309';
+      tbody.innerHTML += `
+        <tr>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">${t.timestamp}</td>
+          <td><span class="badge ${t.badgeCls}">${t.cat}</span></td>
+          <td style="max-width:180px">${t.detail}</td>
+          <td style="font-weight:600">${t.location}</td>
+          <td style="color:var(--text-muted)">${t.reporter}</td>
+          <td>
+            <select class="status-select" style="${statusColor}" onchange="updateStatus(${t.id}, this.value)">
+              <option ${t.status==='รอดำเนินการ'?'selected':''}>รอดำเนินการ</option>
+              <option ${t.status==='ดำเนินการแล้ว'?'selected':''}>ดำเนินการแล้ว</option>
+              <option ${t.status==='ไม่ดำเนินการ'?'selected':''}>ไม่ดำเนินการ</option>
+            </select>
+          </td>
+        </tr>`;
+    });
+  }
+
+  function clearAllData() {
+    if (confirm('ต้องการลบประวัติการแจ้งปัญหาทั้งหมดใช่ไหม?')) {
+      localStorage.removeItem('tickets'); renderTable();
+    }
+  }
+</script>
+</body>
+</html>

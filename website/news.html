@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข่าวสารกิจกรรม | สภานักเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .news-card { display: flex; flex-direction: column; }
+    .news-img {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .news-tag {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--pink); color: white;
+      padding: 4px 10px; font-size: 11px; font-weight: 700;
+      border-radius: 4px;
+    }
+    .news-content { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .news-date { font-size: 12px; color: var(--text-muted); }
+    .news-content h3 { font-size: 15px; font-weight: 700; color: var(--blue); line-height: 1.4; }
+    .news-content p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+    @media (max-width: 480px) {
+      .news-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo-area">
+      <div class="logo-circle">
+        <img src="logo.jpg" alt="โลโก้">
+      </div>
+      <div class="logo-text">
+        <h1>สภานักเรียนโรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</h1>
+        <p>Nawaminthrachinuthit Triam Udom Suksa Nomklao Student Council</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="vision.html">วิสัยทัศน์</a></li>
+      <li><a href="structure.html">ทำเนียบคณะกรรมการ</a></li>
+      <li><a href="news.html" class="active">ข่าวสารกิจกรรม</a></li>
+      <li><a href="report.html">แจ้งปัญหา</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="เมนู">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">หน้าแรก</a>
+    <a href="vision.html">วิสัยทัศน์</a>
+    <a href="structure.html">ทำเนียบ</a>
+    <a href="news.html" class="active">ข่าวสาร</a>
+    <a href="report.html">แจ้งปัญหา</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="section-heading"><i class="fa-solid fa-newspaper"></i> ข่าวสารและกิจกรรมล่าสุด</div>
+
+  <div class="news-grid">
+    <div class="card news-card">
+      <div class="news-img" style="background-image:url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=600');">
+        <span class="news-tag">INQ CENTER</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date">25 พฤษภาคม 2026</div>
+        <h3>กิจกรรมปฐมนิเทศนักเรียนใหม่</h3>
+        <p>สภานักเรียนร่วมต้อนรับและจัดกิจกรรมนันทนาการให้กับน้อง ๆ ม.1 และ ม.4 ในวันปฐมนิเทศประจำปีการศึกษา</p>
+      </div>
+    </div>
+    <div class="card news-card">
+      <div class="news-img" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=600');">
+        <span class="news-tag">INQ CENTER</span>
+      </div>
+      <div class="news-content">
+        <div class="news-date">18 พฤษภาคม 2026</div>
+        <h3>ประชุมสภานักเรียนนัดแรก</h3>
+        <p>คณะกรรมการสภานักเรียนชุดใหม่ร่วมประชุมวางแผนนโยบายและโปรเจกต์ "YoUr Genius X Our Power" ประจำภาคเรียนที่ 1</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© SCNTUN 09 & SCNTUN 10 </p>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

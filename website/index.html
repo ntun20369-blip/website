@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หน้าแรก | สภานักเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* SLIDER */
+    .slider-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      height: 400px;
+      background: #e2e8f0;
+    }
+    .slides-container { display: flex; transition: transform 0.5s ease; height: 100%; }
+    .slide-page {
+      min-width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    .slide-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.92);
+      border: none; width: 40px; height: 40px; border-radius: 50%;
+      cursor: pointer; color: var(--blue); font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      transition: 0.2s; z-index: 10; box-shadow: var(--shadow-md);
+    }
+    .slide-arrow:hover { background: var(--pink); color: white; }
+    .arrow-left { left: 16px; }
+    .arrow-right { right: 16px; }
+    .slider-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; z-index: 10; }
+    .dot { width: 9px; height: 9px; background: rgba(255,255,255,0.55); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+    .dot.active { background: var(--pink); width: 22px; border-radius: 9px; }
+
+    /* CAMPAIGN + SIDEBAR */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .campaign-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 240px;
+      background: linear-gradient(135deg, #e0f2fe 0%, #fce4ec 100%);
+    }
+    .campaign-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--blue);
+      text-align: center;
+      padding: 24px;
+      line-height: 1.4;
+    }
+
+    .sidebar-buttons { display: flex; flex-direction: column; gap: 10px; }
+    .side-btn {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      color: white; text-decoration: none;
+      font-weight: 600; font-size: 14px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .side-btn:hover { opacity: 0.9; transform: translateX(4px); }
+    .side-btn i { width: 20px; text-align: center; }
+    .side-btn.red    { background: #e53935; }
+    .side-btn.pink   { background: var(--pink); }
+    .side-btn.purple { background: #8e24aa; }
+    .side-btn.orange { background: #fb8c00; }
+
+    /* SERVICES */
+    .services-bar {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .service-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-weight: 600; font-size: 14px;
+      transition: 0.2s;
+    }
+    .service-icon {
+      width: 72px; height: 72px;
+      background: var(--pink);
+      color: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      transition: transform 0.2s;
+    }
+    .service-item:hover .service-icon { transform: translateY(-4px); }
+    .service-item:hover { color: var(--pink); }
+
+    /* NEWS */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .news-card { display: flex; flex-direction: column; }
+    .news-poster {
+      height: 200px;
+      background: #e2e8f0;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .news-tag {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--pink); color: white;
+      padding: 3px 9px; font-size: 11px; font-weight: 700;
+      border-radius: 4px;
+    }
+    .news-body { padding: 14px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .news-body h4 { font-size: 14px; color: var(--blue); margin-bottom: 8px; line-height: 1.4; font-weight: 700; }
+    .news-date { font-size: 12px; color: var(--text-muted); }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .slider-wrapper { height: 220px; }
+      .sidebar-buttons { flex-direction: row; flex-wrap: wrap; }
+      .side-btn { flex: 1 1 calc(50% - 5px); }
+    }
+    @media (max-width: 480px) {
+      .side-btn { flex: 1 1 100%; }
+      .services-bar { gap: 14px; }
+      .service-icon { width: 58px; height: 58px; font-size: 1.4rem; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo-area">
+      <div class="logo-circle">
+        <img src="logo.jpg" alt="โลโก้">
+      </div>
+      <div class="logo-text">
+        <h1>สภานักเรียนโรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</h1>
+        <p>Nawaminthrachinuthit Triam Udom Suksa Nomklao Student Council</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">หน้าแรก</a></li>
+      <li><a href="vision.html">วิสัยทัศน์</a></li>
+      <li><a href="structure.html">ทำเนียบคณะกรรมการ</a></li>
+      <li><a href="news.html">ข่าวสารกิจกรรม</a></li>
+      <li><a href="report.html">แจ้งปัญหา</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="เมนู">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html" class="active">หน้าแรก</a>
+    <a href="vision.html">วิสัยทัศน์</a>
+    <a href="structure.html">ทำเนียบ</a>
+    <a href="news.html">ข่าวสาร</a>
+    <a href="report.html">แจ้งปัญหา</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- SLIDER -->
+  <section class="slider-wrapper">
+    <button class="slide-arrow arrow-left" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="slide-arrow arrow-right" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="slider-dots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+    </div>
+    <div class="slides-container" id="slidesContainer">
+      <div class="slide-page" style="background-image:url('unnamed.png'); background-color:#bae6fd;"></div>
+      <div class="slide-page" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200');"></div>
+      <div class="slide-page" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200');"></div>
+    </div>
+  </section>
+
+  <!-- CAMPAIGN + SIDEBAR -->
+  <div class="main-grid">
+    <div class="campaign-box">
+      <div class="campaign-title">YoUr Genius X Our Power</div>
+    </div>
+    <div class="sidebar-buttons">
+      <a href="#" class="side-btn red"><i class="fa-solid fa-graduation-cap"></i> ฝ่ายบริหารวิชาการ</a>
+      <a href="#" class="side-btn pink"><i class="fa-solid fa-id-card"></i> ฝ่ายบริหารงานบุคคล</a>
+      <a href="#" class="side-btn purple"><i class="fa-solid fa-coins"></i> ฝ่ายงบประมาณ</a>
+      <a href="#" class="side-btn orange"><i class="fa-solid fa-building"></i> ฝ่ายบริหารทั่วไป</a>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section>
+    <div class="section-heading"><i class="fa-solid fa-grip"></i> เมนูบริการนักเรียน</div>
+    <div class="services-bar">
+      <a href="#" class="service-item"><div class="service-icon"><i class="fa-solid fa-book"></i></div><span>คู่มือนักเรียน</span></a>
+      <a href="#" class="service-item"><div class="service-icon"><i class="fa-solid fa-calendar-days"></i></div><span>ตารางเรียน</span></a>
+      <a href="#" class="service-item"><div class="service-icon"><i class="fa-solid fa-magnifying-glass"></i></div><span>ผลการเรียน</span></a>
+      <a href="#" class="service-item"><div class="service-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div><span>ชำระค่าเทอม</span></a>
+      <a href="#" class="service-item"><div class="service-icon"><i class="fa-solid fa-camera"></i></div><span>ภาพกิจกรรม</span></a>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section>
+    <div class="section-heading"><i class="fa-solid fa-newspaper"></i> ข่าวประชาสัมพันธ์</div>
+    <div class="news-grid">
+      <div class="card news-card">
+        <div class="news-poster" style="background-image:url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=400');">
+          <span class="news-tag">INQ CENTER</span>
+        </div>
+        <div class="news-body">
+          <h4>มหกรรมการศึกษาเพื่อความเป็นเลิศ ประจำปีการศึกษา</h4>
+          <p class="news-date">13 กันยายน 2026</p>
+        </div>
+      </div>
+      <div class="card news-card">
+        <div class="news-poster" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=400');">
+          <span class="news-tag">INQ CENTER</span>
+        </div>
+        <div class="news-body">
+          <h4>ตลาดนัดเล้าไก่น้อย กิจกรรมส่งเสริมทักษะอาชีพนักเรียน</h4>
+          <p class="news-date">2 กันยายน 2026</p>
+        </div>
+      </div>
+      <div class="card news-card">
+        <div class="news-poster" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=400');">
+          <span class="news-tag">INQ CENTER</span>
+        </div>
+        <div class="news-body">
+          <h4>ประกาศการขอใช้บริการพื้นที่และห้องประชุมสภานักเรียน</h4>
+          <p class="news-date">22 สิงหาคม 2026</p>
+        </div>
+      </div>
+      <div class="card news-card">
+        <div class="news-poster" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400');">
+          <span class="news-tag">INQ CENTER</span>
+        </div>
+        <div class="news-body">
+          <h4>การแข่งขัน ROV ต้านภัยยาเสพติดประจำภาคเรียน</h4>
+          <p class="news-date">22 สิงหาคม 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>© SCNTUN 09 & SCNTUN 10 </p>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+  let cur = 0;
+  const total = 3;
+  const container = document.getElementById('slidesContainer');
+  const dots = document.querySelectorAll('.dot');
+
+  function updateSlider() {
+    container.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+  function moveSlide(dir) {
+    cur = (cur + dir + total) % total;
+    updateSlider(); resetAuto();
+  }
+  function goSlide(i) { cur = i; updateSlider(); resetAuto(); }
+
+  let timer = setInterval(() => moveSlide(1), 5000);
+  function resetAuto() { clearInterval(timer); timer = setInterval(() => moveSlide(1), 5000); }
+</script>
+</body>
+</html>

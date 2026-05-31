@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ทำเนียบคณะกรรมการ | สภานักเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-banner {
+      width: 100%;
+      height: 220px;
+      background-image: url('unnamed.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--radius);
+      margin-bottom: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background-color: #bae6fd;
+    }
+    .banner-title {
+      background: rgba(255,255,255,0.92);
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      color: var(--blue);
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .section-title {
+      text-align: center;
+      color: var(--blue);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 40px 0 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 3px;
+      background: var(--pink); border-radius: 2px;
+    }
+
+    .color-section-title {
+      text-align: center;
+      font-size: 1.35rem; font-weight: 700;
+      margin: 48px 0 20px;
+    }
+
+    /* Member cards */
+    .member-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .member-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .member-photo {
+      width: 100%; height: 260px;
+      background: #e2e8f0;
+      background-size: cover; background-position: center top;
+    }
+    .member-info { padding: 14px; }
+    .member-info h4 { font-size: 14px; color: var(--text); margin-bottom: 4px; font-weight: 700; }
+    .member-info p { font-size: 12px; color: var(--text-muted); }
+    .member-card.large-card .member-photo { height: 320px; }
+    .member-card.large-card .member-info h4 { font-size: 16px; }
+
+    .grid-center { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .grid-center .member-card { width: 220px; }
+    .grid-center .member-card.large-card { width: 260px; }
+
+    .department-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 20px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      align-items: start;
+    }
+    .dep-team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .dep-team-grid .member-photo { height: 190px; }
+
+    /* Color teams */
+    .title-ratchaphruek  { color: #c79200; }
+    .border-ratchaphruek { border-top: 4px solid #fbc02d; }
+    .title-kanlapaphruek { color: #c62828; }
+    .border-kanlapaphruek{ border-top: 4px solid #e53935; }
+    .title-phikulkhaew   { color: #1b5e20; }
+    .border-phikulkhaew  { border-top: 4px solid #2e7d32; }
+    .title-parichat      { color: #e65100; }
+    .border-parichat     { border-top: 4px solid #ff9800; }
+    .title-inthanin      { color: #4527a0; }
+    .border-inthanin     { border-top: 4px solid #7e57c2; }
+
+    @media (max-width: 768px) {
+      .department-layout { grid-template-columns: 1fr; justify-items: center; }
+      .department-layout .member-card.large-card { width: 220px; }
+      .dep-team-grid { width: 100%; }
+      .banner-title { font-size: 1.1rem; padding: 10px 20px; }
+    }
+    @media (max-width: 480px) {
+      .grid-center .member-card { width: calc(50% - 10px); }
+      .dep-team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo-area">
+      <div class="logo-circle">
+        <img src="logo.jpg" alt="โลโก้">
+      </div>
+      <div class="logo-text">
+        <h1>สภานักเรียนโรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาน้อมเกล้า</h1>
+        <p>Nawaminthrachinuthit Triam Udom Suksa Nomklao Student Council</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="vision.html">วิสัยทัศน์</a></li>
+      <li><a href="structure.html" class="active">ทำเนียบคณะกรรมการ</a></li>
+      <li><a href="news.html">ข่าวสารกิจกรรม</a></li>
+      <li><a href="report.html">แจ้งปัญหา</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="เมนู">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">หน้าแรก</a>
+    <a href="vision.html">วิสัยทัศน์</a>
+    <a href="structure.html" class="active">ทำเนียบ</a>
+    <a href="news.html">ข่าวสาร</a>
+    <a href="report.html">แจ้งปัญหา</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="page-banner">
+    <div class="banner-title">โครงสร้างสภานักเรียน</div>
+  </div>
+
+  <!-- ครูที่ปรึกษา -->
+  <h3 class="section-title">ครูที่ปรึกษาสภานักเรียน</h3>
+  <div class="grid-center">
+    <div class="member-card">
+      <div class="member-photo" style="background-image:url('krutiger.png');"></div>
+      <div class="member-info"><h4>ชื่อ-นามสกุลคุณครู</h4><p>ครูที่ปรึกษาสภานักเรียน</p></div>
+    </div>
+    <div class="member-card">
+      <div class="member-photo" style="background-image:url('pcy.png');"></div>
+      <div class="member-info"><h4>ชื่อ-นามสกุลคุณครู</h4><p>ครูที่ปรึกษาสภานักเรียน</p></div>
+    </div>
+  </div>
+
+  <!-- ประธานนักเรียน -->
+  <h3 class="section-title">ประธานนักเรียน</h3>
+  <div class="grid-center">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info">
+        <h4 style="color:var(--blue)">ชื่อ-นามสกุลนักเรียน</h4>
+        <p>ประธานนักเรียนประจำปีการศึกษา</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- เลขานุการ -->
+  <h3 class="section-title">เลขานุการ</h3>
+  <div class="grid-center">
+    <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>ชื่อ-นามสกุลนักเรียน</h4><p>เลขานุการสภานักเรียน</p></div></div>
+    <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>ชื่อ-นามสกุลนักเรียน</h4><p>ผู้ช่วยเลขานุการ</p></div></div>
+  </div>
+
+  <!-- ฝ่ายวิชาการ -->
+  <h3 class="section-title">ฝ่ายบริหารงานวิชาการ</h3>
+  <div class="department-layout">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 style="color:var(--blue)">ชื่อ-นามสกุลนักเรียน</h4><p>หัวหน้าฝ่ายบริหารงานวิชาการ</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายวิชาการ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายวิชาการ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายวิชาการ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายวิชาการ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายวิชาการ</p></div></div>
+    </div>
+  </div>
+
+  <!-- ฝ่ายงบประมาณ -->
+  <h3 class="section-title">ฝ่ายบริหารงานงบประมาณ</h3>
+  <div class="department-layout">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 style="color:var(--blue)">ชื่อ-นามสกุลนักเรียน</h4><p>หัวหน้าฝ่ายบริหารงานงบประมาณ</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายงบประมาณ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายงบประมาณ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายงบประมาณ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายงบประมาณ</p></div></div>
+    </div>
+  </div>
+
+  <!-- ฝ่ายบุคคล -->
+  <h3 class="section-title">ฝ่ายบริหารงานบุคคล</h3>
+  <div class="department-layout">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 style="color:var(--blue)">ชื่อ-นามสกุลนักเรียน</h4><p>หัวหน้าฝ่ายบริหารงานบุคคล</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายบุคคล</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายบุคคล</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายบุคคล</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายบุคคล</p></div></div>
+    </div>
+  </div>
+
+  <!-- ฝ่ายทั่วไป -->
+  <h3 class="section-title">ฝ่ายบริหารทั่วไป</h3>
+  <div class="department-layout">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 style="color:var(--blue)">ชื่อ-นามสกุลนักเรียน</h4><p>หัวหน้าฝ่ายบริหารทั่วไป</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายทั่วไป</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายทั่วไป</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายทั่วไป</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายทั่วไป</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายทั่วไป</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>กรรมการฝ่าย</h4><p>ฝ่ายทั่วไป</p></div></div>
+    </div>
+  </div>
+
+  <!-- คณะสีราชพฤกษ์ -->
+  <h3 class="color-section-title title-ratchaphruek">คณะสีราชพฤกษ์ (สีเหลือง)</h3>
+  <div class="department-layout border-ratchaphruek">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 class="title-ratchaphruek">ชื่อ-นามสกุลนักเรียน</h4><p>ประธานคณะสีราชพฤกษ์</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีราชพฤกษ์</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีราชพฤกษ์</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีราชพฤกษ์</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีราชพฤกษ์</p></div></div>
+    </div>
+  </div>
+
+  <!-- คณะสีกัลปพฤกษ์ -->
+  <h3 class="color-section-title title-kanlapaphruek">คณะสีกัลปพฤกษ์ (สีแดง)</h3>
+  <div class="department-layout border-kanlapaphruek">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 class="title-kanlapaphruek">ชื่อ-นามสกุลนักเรียน</h4><p>ประธานคณะสีกัลปพฤกษ์</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีกัลปพฤกษ์</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีกัลปพฤกษ์</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีกัลปพฤกษ์</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีกัลปพฤกษ์</p></div></div>
+    </div>
+  </div>
+
+  <!-- คณะสีพิกุลแก้ว -->
+  <h3 class="color-section-title title-phikulkhaew">คณะสีพิกุลแก้ว (สีเขียว)</h3>
+  <div class="department-layout border-phikulkhaew">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 class="title-phikulkhaew">ชื่อ-นามสกุลนักเรียน</h4><p>ประธานคณะสีพิกุลแก้ว</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"style="background-image:url('img.jpg');"></div><div class="member-info"><h4>ชื่อ-นามสกุลนักเรียน</h4><p>สีพิกุลแก้ว</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>ชื่อ-นามสกุลนักเรียน</h4><p>สีพิกุลแก้ว</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีพิกุลแก้ว</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีพิกุลแก้ว</p></div></div>
+    </div>
+  </div>
+
+  <!-- คณะสีปาริชาติ -->
+  <h3 class="color-section-title title-parichat">คณะสีปาริชาติ (สีส้ม)</h3>
+  <div class="department-layout border-parichat">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 class="title-parichat">ชื่อ-นามสกุลนักเรียน</h4><p>ประธานคณะสีปาริชาติ</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีปาริชาติ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีปาริชาติ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีปาริชาติ</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีปาริชาติ</p></div></div>
+    </div>
+  </div>
+
+  <!-- คณะสีอินทนิล -->
+  <h3 class="color-section-title title-inthanin">คณะสีอินทนิล (สีม่วง)</h3>
+  <div class="department-layout border-inthanin">
+    <div class="member-card large-card">
+      <div class="member-photo"></div>
+      <div class="member-info"><h4 class="title-inthanin">ชื่อ-นามสกุลนักเรียน</h4><p>ประธานคณะสีอินทนิล</p></div>
+    </div>
+    <div class="dep-team-grid">
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีอินทนิล</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีอินทนิล</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีอินทนิล</p></div></div>
+      <div class="member-card"><div class="member-photo"></div><div class="member-info"><h4>คณะกรรมการสี</h4><p>สีอินทนิล</p></div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© SCNTUN 09 & SCNTUN 10 </p>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
